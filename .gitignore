@@ -1,0 +1,8 @@
+# Folders
+build
+bin
+
+# Files
+CMakeLists.txt.user
+*~
+
