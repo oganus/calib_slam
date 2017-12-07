@@ -11,29 +11,17 @@ MESSAGE(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-#Find OpenCV
-#FIND_PACKAGE(OpenCV REQUIRED)
-
-# Set path for opencv 
-#SET(OpenCV_INCLUDE /usr/gast/bylow/Libraries/opencv/include/)
-#SET(OpenCV_LIBS /usr/gast/bylow/Libraries/opencv/lib/)
+# Set path for opencv
 SET(OpenCV_INCLUDE /usr/include/opencv)
 SET(OpenCV_LIBS /usr/lib/x86_64-linux-gnu/)
-# Set path for OpenNi2
-SET(OpenNI2_INCLUDE /usr/include/)
-SET(OpenNI2_LIBS /usr/lib/x86_64-linux-gnu/ )
 
-# Find the QtWidgets library
-find_package(Qt5Core)
-find_package(Qt5SerialPort)
-
-include_directories(${OpenCV_INCLUDE} ${OpenNI2_INCLUDE} ${INCLUDES_DIRECTORY})
-link_directories(${OpenCV_LIBS} ${OpenNI2_LIBS})
-link_libraries(OpenNI2 opencv_calib3d opencv_contrib opencv_core opencv_features2d opencv_flann opencv_highgui opencv_imgproc opencv_objdetect opencv_ocl opencv_photo opencv_stitching opencv_superres opencv_video)
+include_directories(${OpenCV_INCLUDE} ${INCLUDES_DIRECTORY})
+link_directories(${OpenCV_LIBS})
+link_libraries(opencv_calib3d opencv_contrib opencv_core opencv_features2d opencv_flann opencv_highgui opencv_imgproc opencv_objdetect opencv_ocl opencv_photo opencv_stitching opencv_superres opencv_video)
 # Set some default flags
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3")
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 add_executable(${PROJECT_NAME} ${sources})
 # Include Directories
 
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::SerialPort)
+target_link_libraries(${PROJECT_NAME})
