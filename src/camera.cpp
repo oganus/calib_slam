@@ -17,7 +17,7 @@ Camera::Camera()
         cv::imshow("cam", cameraFrame);
         cv::waitKey(30);
 
-        if (count % 70 == 0)
+        if (count % 10 == 0)
         {
             img_vec_.push_back(cameraFrame);
             std::cout << "Number of saved images = " << img_vec_.size() << std::endl;

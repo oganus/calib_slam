@@ -6,6 +6,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
+#include "camera.h"
 
 /**
  * \brief	Checkerboard Calibration
@@ -16,32 +17,29 @@ class Calibration
 {
 public:
     Calibration();
-//    void setup_calibration(int board_width, int board_height, int num_imgs,
-//                           float square_size, char* imgs_directory, char* imgs_filename,
-//                           char* extension);
+    void setCamera(Camera* cam) { cam_ = cam; }
+    void setup_calibration();
+    double computeReprojectionErrors();
+    void calibrate();
 
-//    double computeReprojectionErrors(const vector< vector< Point3f > >& objectPoints,
-//                                     const vector< vector< Point2f > >& imagePoints,
-//                                     const vector< Mat >& rvecs, const vector< Mat >& tvecs,
-//                                     const Mat& cameraMatrix , const Mat& distCoeffs);
-
-    int calibrate();
-
-    int board_n_;
-    cv::Size board_size_;
-    int board_width_;
-    int board_height_;
-    int num_imgs_;
-    float square_size_;
-    char* imgs_directory_;
-    char* imgs_filename_;
-    char* extension_;
-    cv::Mat img_;
-    cv::Mat gray_;
-    cv::Size img_size_;
-    std::vector< std::vector< cv::Point3f > > object_points_;
-    std::vector< std::vector< cv::Point2f > > image_points_;
-    std::vector< cv::Point2f > corners_;
+private:
+        Camera* cam_;
+        std::vector< cv::Mat > img_vec_;
+        int board_n_;
+        cv::Size board_size_;
+        int board_width_;
+        int board_height_;
+        int num_imgs_;
+        float square_size_;
+        cv::Mat img_;
+        cv::Mat gray_; // not needed as field
+        cv::Size img_size_;
+        std::vector< std::vector< cv::Point3f > > object_points_;
+        std::vector< std::vector< cv::Point2f > > image_points_;
+        std::vector< cv::Point2f > corners_;
+        cv::Mat K_;
+        cv::Mat D_;
+        std::vector< cv::Mat > rvecs_, tvecs_;
 };
 
 #endif
