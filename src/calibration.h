@@ -21,6 +21,7 @@ public:
     void setup_calibration();
     double computeReprojectionErrors();
     void calibrate();
+    void save(const std::string&);
 
 private:
         Camera* cam_;

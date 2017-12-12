@@ -13,6 +13,8 @@ int main(int argc, char **argv)
 //    std::cout << cam->K_ << std::endl;
 //    std::cout << cam->D_ << std::endl;
 
+    calib->save("VX800.yaml");
+
     delete calib;
     delete cam;
 

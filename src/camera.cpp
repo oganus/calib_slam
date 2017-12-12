@@ -23,7 +23,7 @@ Camera::Camera()
             std::cout << "Number of saved images = " << img_vec_.size() << std::endl;
         }
 
-        if (img_vec_.size() == 50)
+        if (img_vec_.size() == 20)
                 break;
 
         count++;

@@ -1,6 +1,48 @@
 #include "calibration.h"
 
+#include <fstream>
+
 Calibration::Calibration() {}
+
+// Print camera parameters to the output file
+void Calibration::save(const std::string& file_name)
+{
+    std::ofstream fs;
+    fs.open(file_name);
+
+    fs << "%YAML:1.0\n\n";
+
+    fs << "Camera.fx"   << ": " << K_.at<double>(0,0) << std::endl;
+    fs << "Camera.fy"   << ": " << K_.at<double>(1,1) << std::endl;
+    fs << "Camera.cx"   << ": " << K_.at<double>(0,2) << std::endl;
+    fs << "Camera.cy"   << ": " << K_.at<double>(1,2) << std::endl;
+    fs << "Camera.k1"   << ": " << D_.at<double>(0) << std::endl;
+    fs << "Camera.k2"   << ": " << D_.at<double>(1) << std::endl;
+    fs << "Camera.p1"   << ": " << D_.at<double>(2) << std::endl;
+    fs << "Camera.p2"   << ": " << D_.at<double>(3) << std::endl;
+    fs << "Camera.k3"   << ": " << D_.at<double>(4) << std::endl;
+    fs << "Camera.fps"  << ": " << 30.0 << std::endl;
+    fs << "Camera.RGB"  << ": " << 1 << std::endl;
+    fs << "ORBextractor.nFeatures"   << ": " << 1000 << std::endl;
+    fs << "ORBextractor.scaleFactor" << ": " << 1.2 << std::endl;
+    fs << "ORBextractor.nLevels"     << ": " << 8 << std::endl;
+    fs << "ORBextractor.iniThFAST"   << ": " << 20 << std::endl;
+    fs << "ORBextractor.minThFAST"   << ": " << 7 << std::endl;
+    fs << "Viewer.KeyFrameSize"      << ": " << 0.05 << std::endl;
+    fs << "Viewer.KeyFrameLineWidth" << ": " << 1 << std::endl;
+    fs << "Viewer.GraphLineWidth"    << ": " << 0.9 << std::endl;
+    fs << "Viewer.PointSize"         << ": " << 2 << std::endl;
+    fs << "Viewer.CameraSize"        << ": " << 0.08 << std::endl;
+    fs << "Viewer.CameraLineWidth"   << ": " << 3 << std::endl;
+    fs << "Viewer.ViewpointX"        << ": " << 0 << std::endl;
+    fs << "Viewer.ViewpointY"        << ": " << -0.7 << std::endl;
+    fs << "Viewer.ViewpointZ"        << ": " << -1.8 << std::endl;
+    fs << "Viewer.ViewpointF"        << ": " << 500 << std::endl;
+
+
+
+    fs.close();
+}
 
 void Calibration::setup_calibration()
 {
